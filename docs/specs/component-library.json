@@ -1,0 +1,326 @@
+{
+  "$schema": "https://ownlay.io/schemas/component-library.json",
+  "name": "OWNLAY Component Library",
+  "version": "1.0.0",
+  "description": "Modular UI components for OWNLAY Marketing Operating System",
+  "designSystem": {
+    "spacing": "8-point grid",
+    "colorPalette": "neutral enterprise",
+    "typography": "Inter (sans), JetBrains Mono (mono)",
+    "borderRadius": {
+      "sm": "4px",
+      "md": "8px",
+      "lg": "12px",
+      "xl": "16px",
+      "2xl": "24px"
+    }
+  },
+  "components": [
+    {
+      "id": "kpi-tile",
+      "name": "KPI Tile",
+      "category": "data-display",
+      "description": "Displays a single key performance indicator with optional change indicator",
+      "props": {
+        "label": { "type": "string", "required": true },
+        "value": { "type": "string", "required": true },
+        "change": { "type": "string", "required": false },
+        "changePositive": { "type": "boolean", "default": true },
+        "icon": { "type": "string", "required": false }
+      },
+      "example": {
+        "label": "Total Spend",
+        "value": "$124,563",
+        "change": "+12.5%",
+        "changePositive": true,
+        "icon": "fa-dollar-sign"
+      },
+      "cssClasses": ["bg-white", "rounded-xl", "p-6", "border", "border-gray-200", "card-hover"]
+    },
+    {
+      "id": "insight-card",
+      "name": "Insight Card",
+      "category": "ai-features",
+      "description": "Displays AI-generated insight with confidence score and action button",
+      "props": {
+        "title": { "type": "string", "required": true },
+        "description": { "type": "string", "required": true },
+        "impact": { "type": "string", "required": true },
+        "confidence": { "type": "number", "min": 0, "max": 100 },
+        "type": { "type": "enum", "values": ["opportunity", "warning", "info", "anomaly"] },
+        "actionLabel": { "type": "string", "required": true }
+      },
+      "example": {
+        "title": "Budget Reallocation Opportunity",
+        "description": "Moving $5,000/week from Google Search to Meta Retargeting could increase ROAS by 18%",
+        "impact": "+$2,340/week",
+        "confidence": 92,
+        "type": "opportunity",
+        "actionLabel": "Apply Change"
+      }
+    },
+    {
+      "id": "campaign-card",
+      "name": "Campaign Card",
+      "category": "data-display",
+      "description": "Displays campaign summary with status, channels, and key metrics",
+      "props": {
+        "name": { "type": "string", "required": true },
+        "status": { "type": "enum", "values": ["active", "paused", "draft", "completed"] },
+        "channels": { "type": "array", "items": "string" },
+        "spend": { "type": "string", "required": true },
+        "conversions": { "type": "string", "required": true },
+        "roas": { "type": "string", "required": true }
+      }
+    },
+    {
+      "id": "data-table",
+      "name": "Data Table",
+      "category": "data-display",
+      "description": "Sortable, filterable table for tabular data",
+      "props": {
+        "headers": { "type": "array", "items": "string", "required": true },
+        "rows": { "type": "array", "items": "array", "required": true },
+        "sortable": { "type": "boolean", "default": true },
+        "filterable": { "type": "boolean", "default": false },
+        "actions": { "type": "boolean", "default": false },
+        "pagination": { "type": "boolean", "default": true }
+      }
+    },
+    {
+      "id": "chart-container",
+      "name": "Chart Container",
+      "category": "charts",
+      "description": "Wrapper for Chart.js visualizations with header and date range selector",
+      "props": {
+        "id": { "type": "string", "required": true },
+        "title": { "type": "string", "required": true },
+        "subtitle": { "type": "string", "required": false },
+        "height": { "type": "string", "default": "320px" },
+        "chartType": { "type": "enum", "values": ["line", "bar", "doughnut", "pie", "area"] }
+      }
+    },
+    {
+      "id": "funnel-chart",
+      "name": "Funnel Chart",
+      "category": "charts",
+      "description": "Horizontal funnel visualization for conversion funnels",
+      "props": {
+        "stages": {
+          "type": "array",
+          "items": {
+            "name": "string",
+            "value": "number",
+            "percent": "number"
+          }
+        }
+      }
+    },
+    {
+      "id": "connector-card",
+      "name": "Connector Card",
+      "category": "integrations",
+      "description": "Integration connector with status and connect/manage action",
+      "props": {
+        "name": { "type": "string", "required": true },
+        "icon": { "type": "string", "required": true },
+        "description": { "type": "string", "required": true },
+        "connected": { "type": "boolean", "required": true },
+        "category": { "type": "string", "required": true }
+      }
+    },
+    {
+      "id": "modal",
+      "name": "Modal",
+      "category": "overlays",
+      "description": "Overlay modal with header, content, and footer actions",
+      "props": {
+        "id": { "type": "string", "required": true },
+        "title": { "type": "string", "required": true },
+        "content": { "type": "string|component", "required": true },
+        "footer": { "type": "string|component", "required": true },
+        "size": { "type": "enum", "values": ["sm", "md", "lg", "xl"], "default": "md" }
+      },
+      "events": {
+        "onOpen": "Function called when modal opens",
+        "onClose": "Function called when modal closes"
+      }
+    },
+    {
+      "id": "form-input",
+      "name": "Form Input",
+      "category": "forms",
+      "description": "Styled text input with label and validation",
+      "props": {
+        "label": { "type": "string", "required": true },
+        "name": { "type": "string", "required": true },
+        "type": { "type": "enum", "values": ["text", "email", "password", "number", "url"], "default": "text" },
+        "placeholder": { "type": "string", "required": false },
+        "required": { "type": "boolean", "default": false },
+        "error": { "type": "string", "required": false }
+      }
+    },
+    {
+      "id": "form-select",
+      "name": "Form Select",
+      "category": "forms",
+      "description": "Styled dropdown select with label",
+      "props": {
+        "label": { "type": "string", "required": true },
+        "name": { "type": "string", "required": true },
+        "options": { "type": "array", "items": { "value": "string", "label": "string" } },
+        "required": { "type": "boolean", "default": false }
+      }
+    },
+    {
+      "id": "progress-bar",
+      "name": "Progress Bar",
+      "category": "feedback",
+      "description": "Horizontal progress indicator with optional label",
+      "props": {
+        "value": { "type": "number", "required": true },
+        "max": { "type": "number", "default": 100 },
+        "label": { "type": "string", "required": false },
+        "showPercent": { "type": "boolean", "default": true },
+        "color": { "type": "string", "default": "indigo" }
+      }
+    },
+    {
+      "id": "badge",
+      "name": "Badge",
+      "category": "data-display",
+      "description": "Small label for status or category indication",
+      "props": {
+        "label": { "type": "string", "required": true },
+        "variant": { "type": "enum", "values": ["success", "warning", "danger", "info", "neutral"], "default": "neutral" }
+      }
+    },
+    {
+      "id": "tabs",
+      "name": "Tabs",
+      "category": "navigation",
+      "description": "Tab navigation component",
+      "props": {
+        "items": {
+          "type": "array",
+          "items": {
+            "id": "string",
+            "label": "string",
+            "active": "boolean"
+          }
+        }
+      },
+      "events": {
+        "onTabChange": "Function called when tab changes"
+      }
+    },
+    {
+      "id": "asset-manager",
+      "name": "Asset Manager",
+      "category": "creative",
+      "description": "Grid-based file/asset browser with upload capability",
+      "props": {
+        "assets": { "type": "array", "items": "Asset" },
+        "allowUpload": { "type": "boolean", "default": true },
+        "allowDelete": { "type": "boolean", "default": true }
+      }
+    },
+    {
+      "id": "wysiwyg-editor",
+      "name": "WYSIWYG Editor",
+      "category": "creative",
+      "description": "Rich text editor for email/landing page content",
+      "props": {
+        "id": { "type": "string", "required": true },
+        "placeholder": { "type": "string", "default": "Start writing..." },
+        "toolbar": { "type": "array", "default": ["bold", "italic", "underline", "link", "image"] }
+      }
+    },
+    {
+      "id": "empty-state",
+      "name": "Empty State",
+      "category": "feedback",
+      "description": "Placeholder for empty data states with CTA",
+      "props": {
+        "icon": { "type": "string", "required": true },
+        "title": { "type": "string", "required": true },
+        "description": { "type": "string", "required": true },
+        "actionLabel": { "type": "string", "required": false },
+        "actionHref": { "type": "string", "required": false }
+      }
+    }
+  ],
+  "layouts": [
+    {
+      "id": "marketing-layout",
+      "name": "Marketing Site Layout",
+      "sections": ["nav", "hero", "content", "footer"]
+    },
+    {
+      "id": "app-layout",
+      "name": "Product App Layout",
+      "sections": ["sidebar", "header", "main"]
+    },
+    {
+      "id": "admin-layout",
+      "name": "Admin Console Layout",
+      "sections": ["sidebar", "header", "main"]
+    },
+    {
+      "id": "onboarding-layout",
+      "name": "Onboarding Wizard Layout",
+      "sections": ["nav", "progress", "content", "actions"]
+    }
+  ],
+  "tokens": {
+    "colors": {
+      "brand": {
+        "50": "#f8fafc",
+        "100": "#f1f5f9",
+        "200": "#e2e8f0",
+        "300": "#cbd5e1",
+        "400": "#94a3b8",
+        "500": "#64748b",
+        "600": "#475569",
+        "700": "#334155",
+        "800": "#1e293b",
+        "900": "#0f172a",
+        "950": "#020617"
+      },
+      "accent": {
+        "primary": "#6366f1",
+        "secondary": "#8b5cf6",
+        "success": "#10b981",
+        "warning": "#f59e0b",
+        "danger": "#ef4444",
+        "info": "#0ea5e9"
+      }
+    },
+    "spacing": {
+      "unit": "8px",
+      "scale": [0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80]
+    },
+    "typography": {
+      "fontFamily": {
+        "sans": "Inter, system-ui, sans-serif",
+        "mono": "JetBrains Mono, monospace"
+      },
+      "fontSize": {
+        "xs": "12px",
+        "sm": "14px",
+        "base": "16px",
+        "lg": "18px",
+        "xl": "20px",
+        "2xl": "24px",
+        "3xl": "30px",
+        "4xl": "36px"
+      },
+      "fontWeight": {
+        "normal": 400,
+        "medium": 500,
+        "semibold": 600,
+        "bold": 700
+      }
+    }
+  }
+}
