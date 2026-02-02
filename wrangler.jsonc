@@ -1,0 +1,33 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ownlay-marketing-os",
+  "compatibility_date": "2024-12-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "pages_build_output_dir": "./dist",
+  
+  // D1 Database - ONLY for Authentication/Registration
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "ownlay-production",
+      "database_id": "13807e3d-8df1-453a-97ac-58414b10eae8"
+    }
+  ],
+  
+  // PostgreSQL via Hyperdrive - For ALL business data (Production only)
+  // NOTE: Hyperdrive is commented out for local development
+  // To enable in production:
+  // 1. Create a Hyperdrive: npx wrangler hyperdrive create ownlay-postgres --connection-string="postgresql://user:pass@host:5432/db"
+  // 2. Uncomment and update the id below with the returned Hyperdrive ID
+  // "hyperdrive": [
+  //   {
+  //     "binding": "HYPERDRIVE",
+  //     "id": "YOUR_HYPERDRIVE_ID_HERE"
+  //   }
+  // ],
+  
+  // Environment variables (set via wrangler secret)
+  "vars": {
+    "ENVIRONMENT": "development"
+  }
+}
